@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUILTY. – Ropa | Rosario</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #ffffff;
+    --red: #e8181c;
+    --gray-light: #f0f0f0;
+    --gray-mid: #d0d0d0;
+    --gray-text: #555;
+    --font-display: 'Barlow Condensed', sans-serif;
+    --font-body: 'Barlow', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--white); color: var(--black); overflow-x: hidden; }
+
+  /* ─── ANNOUNCEMENT BAR ─── */
+  .announcement {
+    background: var(--black);
+    color: var(--white);
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding: 9px 16px;
+    text-transform: uppercase;
+  }
+  .announcement span { color: var(--red); margin: 0 8px; }
+
+  /* ─── HEADER ─── */
+  header {
+    background: var(--white);
+    border-bottom: 1px solid #e8e8e8;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-top {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 14px 40px;
+    gap: 20px;
+  }
+  .logo {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: var(--black);
+    text-decoration: none;
+    line-height: 1;
+  }
+  .logo span { color: var(--red); }
+
+  .search-bar {
+    width: 100%;
+    max-width: 460px;
+    position: relative;
+  }
+  .search-bar input {
+    width: 100%;
+    border: 1.5px solid #ccc;
+    border-radius: 4px;
+    padding: 10px 44px 10px 16px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .search-bar input:focus { border-color: var(--black); }
+  .search-bar button {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .search-bar button svg { width: 18px; height: 18px; }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 28px;
+  }
+  .header-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--black);
+    transition: color .2s;
+  }
+  .header-action:hover { color: var(--red); }
+  .header-action svg { width: 22px; height: 22px; }
+  .header-action span { font-size: 11px; font-weight: 500; letter-spacing: .5px; }
+  .cart-icon { position: relative; }
+  .cart-badge {
+    position: absolute;
+    top: -5px; right: -7px;
+    background: var(--red);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    width: 17px; height: 17px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    border-top: 1px solid #e8e8e8;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 0 40px;
+  }
+  nav a {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+    padding: 12px 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color .2s, color .2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  nav a:hover, nav a.active { border-bottom-color: var(--red); color: var(--red); }
+  nav a svg { width: 12px; height: 12px; }
+
+  /* ─── HERO SLIDER ─── */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--black);
+    height: 460px;
+  }
+  .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity .7s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slide.active { opacity: 1; }
+
+  /* Slide 1 */
+  .slide-1 {
+    background: #fff;
+    overflow: hidden;
+  }
+  .slide-1-bg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+    transform: rotate(-5deg) scale(1.3);
+  }
+  .stripe-red {
+    height: 32px;
+    background: var(--red);
+    margin: 14px 0;
+  }
+  .stripe-black {
+    height: 32px;
+    background: var(--black);
+    margin: 14px 0;
+  }
+  .slide-1-content {
+    position: relative;
+    z-index: 2;
+    border: 4px solid var(--black);
+    padding: 28px 48px;
+    background: var(--white);
+    text-align: center;
+  }
+  .slide-1-content .logo-hero {
+    font-family: var(--font-display);
+    font-size: 80px;
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: 1;
+    color: var(--black);
+  }
+
+  /* Slide 2 */
+  .slide-2 {
+    background: var(--black);
+  }
+  .slide-2-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    text-align: center;
+    padding: 40px;
+  }
+  .slide-2-inner .eyebrow {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--red);
+    text-transform: uppercase;
+  }
+  .slide-2-inner h2 {
+    font-family: var(--font-display);
+    font-size: 72px;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+  .slide-2-inner h2 span { color: var(--red); }
+  .slide-2-inner .address {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 2px;
+  }
+  .slide-2-inner .address span { color: var(--red); }
+
+  /* chains deco for slide 2 */
+  .chain-deco {
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .chain-link {
+    width: 50px;
+    height: 70px;
+    border: 8px solid var(--red);
+    border-radius: 25px;
+    margin: -20px 0;
+    transform: rotate(20deg);
+  }
+  .chain-link:nth-child(even) {
+    background: var(--black);
+    transform: rotate(-20deg) translateX(10px);
+  }
+
+  /* Slider controls */
+  .slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(255,255,255,.85);
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  }
+  .slider-btn:hover { background: var(--white); }
+  .slider-btn svg { width: 18px; height: 18px; }
+  .slider-prev { left: 20px; }
+  .slider-next { right: 20px; }
+  .slider-dots {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+  }
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.4);
+    cursor: pointer;
+    transition: background .2s;
+    border: none;
+  }
+  .dot.active { background: var(--white); }
+
+  /* ─── BENEFITS ─── */
+  .benefits {
+    background: var(--gray-light);
+    padding: 28px 40px;
+  }
+  .benefits-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .benefit-icon {
+    width: 52px; height: 52px;
+    border: 2px solid var(--black);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .benefit-icon svg { width: 24px; height: 24px; }
+  .benefit-text strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+  }
+  .benefit-text small {
+    font-size: 12px;
+    color: var(--gray-text);
+    font-weight: 500;
+  }
+
+  /* ─── SECTION TITLE ─── */
+  .section-title {
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin-bottom: 32px;
+    text-transform: uppercase;
+  }
+
+  /* ─── CATEGORIES ─── */
+  .categories-section {
+    padding: 60px 40px 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  .category-card {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: pointer;
+    background: var(--gray-light);
+  }
+  .category-card:first-child {
+    grid-column: span 2;
+    grid-row: span 2;
+    aspect-ratio: auto;
+  }
+  .category-card .cat-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+  }
+  .category-card:hover .cat-bg { transform: scale(1.05); }
+  .cat-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,.65) 0%, transparent 50%);
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    transition: background .3s;
+  }
+  .category-card:hover .cat-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,.8) 0%, rgba(0,0,0,.1) 70%);
+  }
+  .cat-label {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .category-card:first-child .cat-label { font-size: 28px; }
+
+  /* Placeholder colored backgrounds for category cards */
+  .cat-remeras { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); }
+  .cat-jeans { background: linear-gradient(135deg, #2c3e6e 0%, #1a2a5e 100%); }
+  .cat-vestidos { background: linear-gradient(135deg, #2d1b33 0%, #1a0f20 100%); }
+  .cat-camperas { background: linear-gradient(135deg, #3d2b1f 0%, #2a1a10 100%); }
+  .cat-accesorios { background: linear-gradient(135deg, #1f3d2b 0%, #102a1a 100%); }
+
+  .cat-emoji {
+    font-size: 80px;
+    line-height: 1;
+    margin-bottom: 20px;
+    filter: grayscale(20%);
+  }
+
+  .cat-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+
+  /* ─── PRODUCTS ─── */
+  .products-section {
+    padding: 20px 40px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .product-card {
+    background: var(--white);
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+    border: 1px solid #eee;
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.1);
+  }
+  .product-img {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: var(--gray-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .product-placeholder {
+    font-size: 80px;
+    opacity: .4;
+  }
+  .product-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s ease;
+  }
+  .product-card:hover .product-photo { transform: scale(1.04); }
+  .off-badge {
+    position: absolute;
+    top: 12px; left: 12px;
+    background: rgba(255,255,255,.92);
+    border-radius: 50%;
+    width: 52px; height: 52px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.1;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,.12);
+  }
+  .off-badge .pct { font-size: 18px; font-weight: 900; color: var(--black); }
+  .off-badge .off-text { font-size: 11px; color: var(--gray-text); }
+  .product-info {
+    padding: 16px 16px 18px;
+  }
+  .product-name {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: var(--black);
+  }
+  .product-prices {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .price-old {
+    font-size: 13px;
+    color: var(--gray-text);
+    text-decoration: line-through;
+  }
+  .price-new {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--black);
+  }
+  .installments {
+    font-size: 12px;
+    color: var(--gray-text);
+  }
+
+  /* ─── NEWSLETTER ─── */
+  .newsletter {
+    background: var(--black);
+    padding: 72px 40px;
+    text-align: center;
+  }
+  .newsletter-label {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.5);
+    margin-bottom: 20px;
+  }
+  .newsletter h2 {
+    font-family: var(--font-display);
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -1px;
+    margin-bottom: 14px;
+  }
+  .newsletter p {
+    color: rgba(255,255,255,.65);
+    font-size: 15px;
+    margin-bottom: 36px;
+  }
+  .newsletter-form {
+    max-width: 580px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .newsletter-form input {
+    width: 100%;
+    padding: 18px 64px 18px 24px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    background: #fff;
+    color: var(--black);
+  }
+  .newsletter-form button {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 58px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--black);
+    transition: transform .2s;
+  }
+  .newsletter-form button:hover { transform: translateX(3px); }
+  .newsletter-form button svg { width: 22px; height: 22px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--gray-light);
+    padding: 50px 40px 30px;
+  }
+  .footer-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  .footer-col h4 {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    color: var(--black);
+  }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 12px; }
+  .footer-links a {
+    color: #444;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color .2s;
+  }
+  .footer-links a:hover { color: var(--red); }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: #444;
+  }
+  .contact-item svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--black); }
+  .social-btn {
+    width: 44px; height: 44px;
+    background: var(--black);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background .2s;
+    text-decoration: none;
+  }
+  .social-btn:hover { background: var(--red); }
+  .social-btn svg { width: 20px; height: 20px; fill: #fff; }
+  .footer-bottom {
+    max-width: 1100px;
+    margin: 0 auto;
+    border-top: 1px solid var(--gray-mid);
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #888;
+  }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--black);
+  }
+
+  /* ─── WHATSAPP FLOAT ─── */
+  .wa-float {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    width: 52px; height: 52px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(37,211,102,.4);
+    cursor: pointer;
+    z-index: 200;
+    transition: transform .2s;
+    text-decoration: none;
+  }
+  .wa-float:hover { transform: scale(1.1); }
+  .wa-float svg { width: 28px; height: 28px; fill: #fff; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .header-top { grid-template-columns: auto 1fr auto; padding: 12px 20px; }
+    .search-bar { display: none; }
+    nav { gap: 20px; padding: 0 20px; overflow-x: auto; }
+    .benefits-grid { grid-template-columns: repeat(2,1fr); }
+    .categories-section, .products-section { padding: 40px 20px; }
+    .categories-grid { grid-template-columns: repeat(2,1fr); }
+    .category-card:first-child { grid-column: span 2; }
+    .products-grid { grid-template-columns: repeat(2,1fr); }
+    .footer-grid { grid-template-columns: 1fr; }
+    .hero { height: 320px; }
+    .slide-1-content .logo-hero { font-size: 56px; }
+    .slide-2-inner h2 { font-size: 48px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT -->
+<div class="announcement">
+  20% OFF EFECTIVO<span>·</span>3 CUOTAS SIN INTERÉS<span>·</span>ENVÍOS A TODO EL PAÍS
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    <a href="#" class="logo">GUILTY<span>.</span></a>
+    <div class="search-bar">
+      <input type="text" placeholder="¿Qué estás buscando?">
+      <button>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+      </button>
+    </div>
+    <div class="header-actions">
+      <a href="#" class="header-action">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/>
+        </svg>
+        <span>Mi cuenta</span>
+      </a>
+      <a href="#" class="header-action">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/>
+        </svg>
+        <span>Ayuda</span>
+      </a>
+      <a href="#" class="header-action">
+        <div class="cart-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <div class="cart-badge">0</div>
+        </div>
+        <span>Mi carrito</span>
+      </a>
+    </div>
+  </div>
+  <nav>
+    <a href="#" class="active">Inicio</a>
+    <a href="#">
+      Productos
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+    </a>
+    <a href="#">Contacto</a>
+    <a href="#">Preguntas Frecuentes</a>
+  </nav>
+</header>
+
+<!-- HERO SLIDER -->
+<div class="hero">
+  <!-- Slide 1 -->
+  <div class="slide slide-1 active">
+    <div class="slide-1-bg">
+      <div class="stripe-red"></div>
+      <div class="stripe-black"></div>
+      <div class="stripe-red"></div>
+      <div class="stripe-black"></div>
+      <div class="stripe-red"></div>
+    </div>
+    <div class="slide-1-content">
+      <div class="logo-hero">GUILTY.</div>
+    </div>
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="slide slide-2">
+    <div class="chain-deco">
+      <div class="chain-link"></div>
+      <div class="chain-link"></div>
+      <div class="chain-link"></div>
+      <div class="chain-link"></div>
+    </div>
+    <div class="slide-2-inner">
+      <div class="eyebrow">Encontranos en</div>
+      <h2>PTE. ROCA <span>832</span></h2>
+      <div class="address">Rosario <span>·</span> Santa Fe</div>
+    </div>
+  </div>
+
+  <button class="slider-btn slider-prev" onclick="changeSlide(-1)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+  </button>
+  <button class="slider-btn slider-next" onclick="changeSlide(1)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+  </button>
+  <div class="slider-dots">
+    <button class="dot active" onclick="goSlide(0)"></button>
+    <button class="dot" onclick="goSlide(1)"></button>
+  </div>
+</div>
+
+<!-- BENEFITS -->
+<div class="benefits">
+  <div class="benefits-grid">
+    <div class="benefit-item">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+        </svg>
+      </div>
+      <div class="benefit-text">
+        <strong>Hacemos envíos</strong>
+        <small>A todo el país</small>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <path d="M9 12h6"/>
+        </svg>
+      </div>
+      <div class="benefit-text">
+        <strong>20% OFF efectivo</strong>
+        <small>10% OFF transferencia</small>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>
+        </svg>
+      </div>
+      <div class="benefit-text">
+        <strong>3 cuotas sin interés</strong>
+        <small>Con tarjeta de crédito o GO Cuotas</small>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/>
+        </svg>
+      </div>
+      <div class="benefit-text">
+        <strong>Cambios y devoluciones</strong>
+        <small>Por 15 días</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="categories-section">
+  <h2 class="section-title">Categorías</h2>
+  <div class="categories-grid">
+
+    <div class="category-card">
+      <div class="cat-inner cat-remeras" style="height:100%">
+        <div class="cat-emoji">👕</div>
+      </div>
+      <div class="cat-overlay">
+        <span class="cat-label">Remeras</span>
+      </div>
+    </div>
+
+    <div class="category-card">
+      <div class="cat-inner cat-jeans" style="height:100%">
+        <div class="cat-emoji" style="font-size:56px">👖</div>
+      </div>
+      <div class="cat-overlay">
+        <span class="cat-label">Jeans</span>
+      </div>
+    </div>
+
+    <div class="category-card">
+      <div class="cat-inner cat-vestidos" style="height:100%">
+        <div class="cat-emoji" style="font-size:56px">👗</div>
+      </div>
+      <div class="cat-overlay">
+        <span class="cat-label">Vestidos</span>
+      </div>
+    </div>
+
+    <div class="category-card">
+      <div class="cat-inner cat-camperas" style="height:100%">
+        <div class="cat-emoji" style="font-size:56px">🧥</div>
+      </div>
+      <div class="cat-overlay">
+        <span class="cat-label">Camperas</span>
+      </div>
+    </div>
+
+    <div class="category-card">
+      <div class="cat-inner cat-accesorios" style="height:100%">
+        <div class="cat-emoji" style="font-size:56px">👜</div>
+      </div>
+      <div class="cat-overlay">
+        <span class="cat-label">Accesorios</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section">
+  <h2 class="section-title">Destacados</h2>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <div class="product-img" style="background:#1a1a2e">
+        <div class="product-placeholder">🖤</div>
+        <div class="off-badge"><span class="pct">25%</span><span class="off-text">OFF</span></div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Vestido Tul Contraste</div>
+        <div class="product-prices">
+          <span class="price-old">$63.000,00</span>
+          <span class="price-new">$47.000,00</span>
+        </div>
+        <div class="installments">3 cuotas sin interés de $15.666,67</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img" style="background:#2c3e6e">
+        <div class="product-placeholder">👖</div>
+        <div class="off-badge"><span class="pct">30%</span><span class="off-text">OFF</span></div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Mini de Jean Celeste</div>
+        <div class="product-prices">
+          <span class="price-old">$69.000,00</span>
+          <span class="price-new">$48.500,00</span>
+        </div>
+        <div class="installments">3 cuotas sin interés de $16.166,67</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img" style="background:#3d3d3d">
+        <div class="product-placeholder">🩳</div>
+        <div class="off-badge"><span class="pct">25%</span><span class="off-text">OFF</span></div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Bermuda Artic</div>
+        <div class="product-prices">
+          <span class="price-old">$64.800,00</span>
+          <span class="price-new">$48.500,00</span>
+        </div>
+        <div class="installments">3 cuotas sin interés de $16.166,67</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img" style="background:#2a3a5a">
+        <div class="product-placeholder">🧥</div>
+        <div class="off-badge"><span class="pct">36%</span><span class="off-text">OFF</span></div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Campera Jean Oxido</div>
+        <div class="product-prices">
+          <span class="price-old">$82.200,00</span>
+          <span class="price-new">$53.000,00</span>
+        </div>
+        <div class="installments">3 cuotas sin interés de $17.666,67</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div class="newsletter-label">Newsletter</div>
+  <h2>Recibí todas las ofertas</h2>
+  <p>¿Querés recibir nuestras ofertas? ¡Registrate ya mismo y comenzá a disfrutarlas!</p>
+  <div class="newsletter-form">
+    <input type="email" placeholder="Email">
+    <button>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M5 12h14m-7-7 7 7-7 7"/>
+      </svg>
+    </button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>Navegación</h4>
+      <ul class="footer-links">
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Productos</a></li>
+        <li><a href="#">Contacto</a></li>
+        <li><a href="#">Preguntas Frecuentes</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contactános</h4>
+      <div class="contact-item">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.484 2 2.003 6.479 2.003 11.999c0 1.954.53 3.779 1.45 5.353L2 22l4.793-1.408A10.002 10.002 0 0 0 12.004 22C17.524 22 22 17.52 22 12S17.524 2 12.004 2z"/></svg>
+        543416816475
+      </div>
+      <div class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.42 2 2 0 0 1 3.58 1.26h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8a16 16 0 0 0 6 6l.27-.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.27 16.92z"/></svg>
+        +543416816475
+      </div>
+      <div class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        guiltystore1@gmail.com
+      </div>
+      <div class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Presidente Roca 832 – Rosario – Santa Fe
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Sigamos conectados</h4>
+      <a href="#" class="social-btn">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-logo">GUILTY.</span>
+    <span>© 2025 Guilty – Todos los derechos reservados</span>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/543416816475" class="wa-float" target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.484 2 2.003 6.479 2.003 11.999c0 1.954.53 3.779 1.45 5.353L2 22l4.793-1.408A10.002 10.002 0 0 0 12.004 22C17.524 22 22 17.52 22 12S17.524 2 12.004 2z"/></svg>
+</a>
+
+<script>
+  let current = 0;
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+
+  function goSlide(n) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+  function changeSlide(dir) { goSlide(current + dir); }
+  setInterval(() => changeSlide(1), 4500);
+</script>
+</body>
+</html>
